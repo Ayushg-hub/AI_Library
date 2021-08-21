@@ -3,9 +3,23 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
-project ("AI_Library")
+project (AI_Library)
+
+#include_directories(src/common)
+
+#link_directories(src/common)
+
+add_subdirectory(src/common)
 
 # Add source to this project's executable.
 add_executable (AI_Library "AI_Library.cpp" "AI_Library.h")
+
+target_link_libraries(AI_Library PUBLIC Tensor)
+
+target_include_directories(AI_Library PUBLIC src/common)
+
+#target_link_directories(AI_Library PUBLIC src/common)
+
+
 
 # TODO: Add tests and install targets if needed.

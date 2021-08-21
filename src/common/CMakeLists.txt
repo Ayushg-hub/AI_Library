@@ -1,0 +1,1 @@
+add_library(Tensor STATIC "Tensor.h" "Tensor.cpp")
