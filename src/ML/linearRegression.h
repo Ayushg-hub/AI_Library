@@ -4,14 +4,20 @@
 
 class linearRegression
 {
-    Tensor weights;
+    d_Tensor::Tensor weights;
 
 public:
     linearRegression();
     void compile();
-    void fit(double* inputs, double* outputs, unsigned int epochs);
-    void eval(double* inputs, double* outputs);
-    void predict(double* inputs);
+
+    /* input : rows = each data point
+               column = each feature
+               tensor of dim {rows,columns}
+    */
+    void fit(d_Tensor::Tensor inputs, d_Tensor::Tensor outputs, unsigned int epochs);
+
+    void eval(d_Tensor::Tensor inputs, d_Tensor::Tensor outputs);
+    d_Tensor::Tensor predict(d_Tensor::Tensor inputs);
 
 private:
 

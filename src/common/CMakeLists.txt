@@ -1,1 +1,1 @@
-add_library(Tensor STATIC "Tensor.h" "Tensor.cpp")
+add_library(Tensor STATIC "Tensor.h" "Tensor.cpp"   "linalg.h" )
