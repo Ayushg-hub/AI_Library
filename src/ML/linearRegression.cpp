@@ -26,8 +26,17 @@ d_Tensor::Tensor linearRegression::fit(d_Tensor::Tensor inputs, d_Tensor::Tensor
 }
 void linearRegression::eval(d_Tensor::Tensor inputs, d_Tensor::Tensor outputs)
 {
+	if (inputs.shape()[0] != outputs.shape()[0])
+	{
+		throw("input mismatch. make sure number of sample points and the size of outputs matches");
+	}
+
+	d_Tensor::Tensor pred = linalg::Matrix::matmul(inputs, weights);
+	double err = linalg::Vector::l2normSq(pred - outputs)/pred.shape()[0];
+	std::cout << "mean squared error : " << err<<std::endl;
 
 }
+
 d_Tensor::Tensor linearRegression::predict(d_Tensor::Tensor inputs)
 {
 	return linalg::Matrix::matmul(inputs, weights);

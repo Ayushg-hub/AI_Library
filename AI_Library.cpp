@@ -49,6 +49,8 @@ int main()
 
 	linearRegression model;
 	std::cout<<"weights : \n"<<model.fit(t1, t2)<<std::endl;
+	std::cout << "eval : \n";
+	model.eval(t1,t2);
 
 	//d_Tensor::Tensor t1(data, 9, { 3,3 });
 	//d_Tensor::Tensor t2(data2, 3, { 3 });
