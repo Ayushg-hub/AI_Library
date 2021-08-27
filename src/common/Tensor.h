@@ -45,7 +45,7 @@ namespace d_Tensor
 		bool operator!=(const Tensor& other) const;
 
 		Tensor operator[](const std::size_t& i) const;
-		double operator[](const std::vector<std::size_t>& lst);
+		double operator[](const std::vector<std::size_t>& lst) const;
 
 		friend std::ostream& operator<<(std::ostream& out, const Tensor& T);
 
@@ -65,7 +65,7 @@ namespace d_Tensor
 		const Tensor* checkCompatibility(const Tensor& A, const Tensor& B) const;
 		Tensor broadcast(std::vector<unsigned int> _dst, Tensor& T);
 		
-		void reshape(std::vector<int> dimensions);
+		void reshape(std::vector<std::size_t> dimensions);
 		std::size_t size() const;
 		std::vector<std::size_t> shape() const;
 
@@ -113,12 +113,25 @@ namespace d_Tensor
 	inline std::ostream& operator<<(std::ostream& out, const Tensor& T)
 	{
 		std::size_t size = T.size();
-		out << "[ ";
-		for (std::size_t i = 0; i < size; i++)
+
+		if (T.shape().size() == 2 && T.shape()[1] == 1)
 		{
-			out << T.c_data[i] << " , ";
+			out << "[ ";
+			for (std::size_t i = 0; i < size; i++)
+			{
+				out << T.c_data[i] << " , ";
+			}
+			out << "\b\b]";
 		}
-		out << "\b\b]";
+		else
+		{
+			out << "[ ";
+			for (std::size_t i = 0; i < T.shape()[0]; i++)
+			{
+				out << T[i] << std::endl;
+			}
+			out << "\b\b]";
+		}
 		return out;
 	}
 }

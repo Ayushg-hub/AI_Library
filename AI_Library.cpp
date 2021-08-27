@@ -3,8 +3,7 @@
 #pragma once
 #include<iostream>
 #include<typeinfo>
-#include"linalg.h"
-//#include<Tensor.h>
+#include"src/ML/linearRegression.h"
 #include<sstream>
 
 
@@ -42,23 +41,31 @@ int main()
 	//float* I;
 	//double* J;
 
-	d_Tensor::Tensor t1 = { {2,0,0},
-							{0,4,0},
-							{0,0,8 } };
+	d_Tensor::Tensor t1 = { {2,23,44},
+							{11,4,50},
+							{23,40,8} };
 
-	d_Tensor::Tensor t2 = { 1,2,3 };
+	d_Tensor::Tensor t2 = { 0, 3,4 };
+
+	linearRegression model;
+	std::cout<<"weights : \n"<<model.fit(t1, t2)<<std::endl;
+	std::cout << "eval : \n";
+	model.eval(t1,t2);
 
 	//d_Tensor::Tensor t1(data, 9, { 3,3 });
 	//d_Tensor::Tensor t2(data2, 3, { 3 });
 	std::cout << "t1 shape :" << str(t1.shape()) << std::endl;
 	
 	std::cout << "t2 shape :" << str(t2.shape()) << std::endl;
+	std::cout << "t2 norm : " << linalg::Vector::l2norm(t2) << std::endl;
 
 	try
 	{
 		std::cout << "t1 det : " << linalg::Matrix::det(t1) << std::endl;
+		std::cout << "t1 transpose : " << linalg::Matrix::Transpose(t1) << std::endl;
 		std::cout << "t1 inv : " << linalg::Matrix::inverse(t1) << std::endl;
 		std::cout << "inv check : t*t_inv = " << linalg::Matrix::matmul(t1, linalg::Matrix::inverse(t1)) << std::endl;
+
 	}
 	catch (const char* e)
 	{
@@ -87,7 +94,7 @@ int main()
 	std::cout <<"x : "<< x << std::endl;
 
 
-	std::cout << t1[{1, 2, 3}] << std::endl;
+	//std::cout << t1[{1, 2, 3}] << std::endl;
 	std::cout << t1[1] << std::endl;
 	t1[1][1] = 1000;
 	std::cout << t1[1][1] << std::endl;
@@ -95,6 +102,7 @@ int main()
 	std::cout << t1[1][1] << std::endl;
 	std::cout << t1 << std::endl;
 	std::cout << t1.Slice({ 0,0 }, {2,2}) << std::endl;
+	std::cout <<"t1[{1, 1}] : " <<t1[{1, 1}] << std::endl;
 	
 
 	
