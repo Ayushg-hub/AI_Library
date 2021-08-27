@@ -882,10 +882,10 @@ namespace d_Tensor
 		return S;
 	}
 
-	//void Tensor::reshape(std::vector<int> dimensions)
-	//{
-
-	//}
+	void Tensor::reshape(std::vector<std::size_t> dimensions)
+	{
+		dim = dimensions;
+	}
 
 	std::size_t Tensor::size() const
 	{

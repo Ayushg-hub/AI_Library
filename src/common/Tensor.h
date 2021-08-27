@@ -65,7 +65,7 @@ namespace d_Tensor
 		const Tensor* checkCompatibility(const Tensor& A, const Tensor& B) const;
 		Tensor broadcast(std::vector<unsigned int> _dst, Tensor& T);
 		
-		void reshape(std::vector<int> dimensions);
+		void reshape(std::vector<std::size_t> dimensions);
 		std::size_t size() const;
 		std::vector<std::size_t> shape() const;
 

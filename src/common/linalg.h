@@ -131,9 +131,31 @@ namespace linalg
 			}
 		}
 
-		d_Tensor::Tensor Transpose(const d_Tensor::Tensor& A, bool inplace = false)
+		d_Tensor::Tensor Transpose(d_Tensor::Tensor& A, bool inplace = false)
 		{
+			std::vector<std::size_t> T_shape = { A.shape()[1],A.shape()[0] };
+			d_Tensor::Tensor t(A.size(), T_shape);
+			for (std::size_t i = 0; i < A.shape()[0]; i++)
+			{
+				for (std::size_t j = 0; j < A.shape()[1]; j++)
+				{
+					t[j][i] = A[i][j];
+				}
+			}
 
+			if (inplace)
+			{
+				A.reshape(T_shape);
+				for (std::size_t i = 0; i < A.shape()[0]; i++)
+				{
+					for (std::size_t j = 0; j < A.shape()[1]; j++)
+					{
+						A[i][j] = t[i][j];
+					}
+				}
+			}
+
+			return t;
 		}
 
 		d_Tensor::Tensor det(const d_Tensor::Tensor& A)
