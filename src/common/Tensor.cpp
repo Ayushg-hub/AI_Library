@@ -764,9 +764,27 @@ namespace d_Tensor
 		}
 	}
 
-	double Tensor::operator[](const std::vector<std::size_t>& lst)
+	double Tensor::operator[](const std::vector<std::size_t>& lst) const
 	{
-		return c_data[0];
+		if (lst.size() != dim.size())
+		{
+			throw ("use the correct number of axes. check the size of the list of indices passesed");
+		}
+
+		std::vector<std::size_t> lst2 = dim;
+		std::size_t idx = 0;
+		for (auto it1 : lst)
+		{
+			lst2.erase(lst2.begin());
+			double s = 1;
+
+			for (auto it2 : lst2)
+			{
+				s *= it2;
+			}
+			idx += it1 * s;
+		}
+		return c_data[idx];
 	}
 
 	void Tensor::print()

@@ -1,4 +1,4 @@
-#include"../common/Tensor.h"
+#include"../common/linalg.h"
 
 //a class for performing linear regression
 
@@ -14,7 +14,7 @@ public:
                column = each feature
                tensor of dim {rows,columns}
     */
-    void fit(d_Tensor::Tensor inputs, d_Tensor::Tensor outputs, unsigned int epochs);
+    d_Tensor::Tensor fit(d_Tensor::Tensor inputs, d_Tensor::Tensor outputs, unsigned int epochs = 5);
 
     void eval(d_Tensor::Tensor inputs, d_Tensor::Tensor outputs);
     d_Tensor::Tensor predict(d_Tensor::Tensor inputs);
